@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-typedef union ConficNodeSchema ConficNodeSchema;
+typedef union ConficSchema ConficSchema;
 typedef struct ConficNodeAttribute ConficNodeAttribute;
 typedef struct ConficNode ConficNode;
 
@@ -49,7 +49,7 @@ typedef struct ConficStr {
 
 typedef struct ConficArray {
     ConficNodeType type;
-    ConficNodeSchema element_schema;
+    ConficSchema element_schema;
     ConficNodeRangeConstraint *len_range;
 
     ConficNodeAttribute *_elements;
@@ -57,26 +57,26 @@ typedef struct ConficArray {
 
 typedef struct ConficMap {
     ConficNodeType value_type;
-    ConficNodeSchema *value_schema;
+    ConficSchema *value_schema;
     ConficNodeRangeConstraint *len_range;
 
     ConficNodeAttribute *_entries;
 } ConficMap;
 
-typedef union ConficNodeSchema {
-    ConficInt *intnode;
-    ConficFloat *floatnode;
-    ConficStr *strnode;
-    ConficArray *arraynode;
+typedef union ConficSchema {
+    ConficInt *integer;
+    ConficFloat *floating;
+    ConficStr *str;
+    ConficArray *array;
     ConficMap *map;
     ConficNode *node;
-} ConficNodeSchema;
+} ConficSchema;
 
 typedef struct ConficNodeAttribute {
     char *key;
     bool is_nullable;
     ConficNodeType type;
-    ConficNodeSchema schema;
+    ConficSchema schema;
 } ConficNodeAttribute;
 
 typedef struct ConficNode {
